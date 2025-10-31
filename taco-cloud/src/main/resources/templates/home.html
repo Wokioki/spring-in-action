@@ -4,9 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
-<body>
-<h1>Welcome to Taco Cloud!</h1>
-<img th:src="@{/images/TacoCloud.jpg}" alt="Taco Cloud Logo" width="100" height="100"/>
+<body class="center-page">
+<div class="card">
+    <h1>🌮 Welcome to Taco Cloud!</h1>
+    <img th:src="@{/images/TacoCloud.jpg}" alt="Taco Cloud Logo" class="logo"/>
+
+    <div class="center-content">
+        <a th:href="@{/design}" class="btn">Start Designing Your Taco</a>
+    </div>
+</div>
 </body>
 </html>

@@ -78,3 +78,10 @@ hr {
     border: none;
     border-top: 1px solid #ddd;
 }
+
+.validationError {
+    color: #d93025;
+    font-size: 0.9rem;
+    margin-top: 4px;
+    display: inline-block;
+}

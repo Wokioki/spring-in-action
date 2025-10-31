@@ -23,30 +23,64 @@
         <hr/>
 
         <h3>Delivery Info</h3>
+
         <label>Name:</label>
-        <input type="text" th:field="*{deliveryName}" placeholder="Your name" class="input"/><br/>
+        <input type="text" th:field="*{deliveryName}" placeholder="Your name" class="input"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryName')}"
+              th:errors="*{deliveryName}">Name error</span>
+        <br/>
 
         <label>Street address:</label>
-        <input type="text" th:field="*{deliveryStreet}" placeholder="Street" class="input"/><br/>
+        <input type="text" th:field="*{deliveryStreet}" placeholder="Street" class="input"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryStreet')}"
+              th:errors="*{deliveryStreet}">Street error</span>
+        <br/>
 
         <label>City:</label>
-        <input type="text" th:field="*{deliveryCity}" placeholder="City" class="input"/><br/>
+        <input type="text" th:field="*{deliveryCity}" placeholder="City" class="input"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryCity')}"
+              th:errors="*{deliveryCity}">City error</span>
+        <br/>
 
         <label>State:</label>
-        <input type="text" th:field="*{deliveryState}" placeholder="State" class="input"/><br/>
+        <input type="text" th:field="*{deliveryState}" placeholder="State" class="input"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryState')}"
+              th:errors="*{deliveryState}">State error</span>
+        <br/>
 
         <label>Zip code:</label>
-        <input type="text" th:field="*{deliveryZip}" placeholder="Zip" class="input"/><br/>
+        <input type="text" th:field="*{deliveryZip}" placeholder="Zip" class="input"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('deliveryZip')}"
+              th:errors="*{deliveryZip}">Zip error</span>
+        <br/>
 
         <h3>Payment Info</h3>
+
         <label>Credit Card #:</label>
-        <input type="text" th:field="*{ccNumber}" placeholder="1111 2222 3333 4444" class="input"/><br/>
+        <input type="text" th:field="*{ccNumber}" placeholder="1111 2222 3333 4444" class="input"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('ccNumber')}"
+              th:errors="*{ccNumber}">CC number error</span>
+        <br/>
 
         <label>Expiration:</label>
-        <input type="text" th:field="*{ccExpiration}" placeholder="MM/YY" class="input"/><br/>
+        <input type="text" th:field="*{ccExpiration}" placeholder="MM/YY" class="input"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('ccExpiration')}"
+              th:errors="*{ccExpiration}">Expiration error</span>
+        <br/>
 
         <label>CVV:</label>
-        <input type="text" th:field="*{ccCVV}" placeholder="123" class="input"/><br/>
+        <input type="text" th:field="*{ccCVV}" placeholder="123" class="input"/>
+        <span class="validationError"
+              th:if="${#fields.hasErrors('ccCVV')}"
+              th:errors="*{ccCVV}">CVV error</span>
+        <br/>
 
         <div class="center-content">
             <input type="submit" value="Submit Order" class="btn"/>

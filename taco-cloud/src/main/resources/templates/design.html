@@ -6,7 +6,6 @@
     <link rel="stylesheet" th:href="@{/styles.css}" />
 </head>
 <body class="center-page">
-
 <div class="card">
     <h1>Design your taco!</h1>
     <img th:src="@{/images/TacoCloud.jpg}" alt="Taco Cloud Logo" class="logo"/>
@@ -67,6 +66,15 @@
         <div class="form-section">
             <h3>Name your taco creation:</h3>
             <input type="text" th:field="*{name}" placeholder="Enter taco name" class="input"/>
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">Name error</span>
+        </div>
+
+        <div class="form-section">
+      <span class="validationError"
+            th:if="${#fields.hasErrors('ingredients')}"
+            th:errors="*{ingredients}">Ingredients error</span>
         </div>
 
         <div class="center-content">

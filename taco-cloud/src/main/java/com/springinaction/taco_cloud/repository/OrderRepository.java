@@ -1,9 +1,8 @@
 package com.springinaction.taco_cloud.repository;
 
 import com.springinaction.taco_cloud.model.TacoOrder;
-import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
 
-
-public interface OrderRepository {
-    TacoOrder save(TacoOrder order);
+public interface OrderRepository
+    extends CrudRepository<TacoOrder, Long> {
 }

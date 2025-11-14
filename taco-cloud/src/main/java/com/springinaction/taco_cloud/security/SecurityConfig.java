@@ -2,12 +2,13 @@ package com.springinaction.taco_cloud.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.springinaction.taco_cloud.repository.UserRepository;
+import com.springinaction.taco_cloud.model.User;
 
 @Configuration
 public class SecurityConfig {
@@ -18,26 +19,15 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
+    public UserDetailsService userDetailsService(UserRepository userRepo) {
+        return username -> {
+            User user = userRepo.findByUsername(username);
+            if (user != null) {
+                return user;
+            }
 
-        List<UserDetails> usersList = new ArrayList<>();
-
-        usersList.add(
-                new User(
-                        "buzz",
-                        encoder.encode("password"),
-                        Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))
-                )
-        );
-
-        usersList.add(
-                new User(
-                        "woody",
-                        encoder.encode("password"),
-                        Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"))
-                )
-        );
-
-        return new InMemoryUserDetailsManager(usersList);
+            throw new UsernameNotFoundException(
+                    "User '" + username + "' not found");
+        };
     }
 }

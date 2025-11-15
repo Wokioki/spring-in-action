@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/login.css}">
+</head>
+
+<body class="login-page">
+
+<div class="login-card">
+
+    <img th:src="@{/images/TacoCloud.jpg}" class="logo" alt="Taco Cloud"/>
+
+    <h1>Welcome back</h1>
+
+    <p class="subtitle">Please log in to continue</p>
+
+    <div th:if="${error}" class="error-box">
+        Unable to login. Check your username and password.
+    </div>
+
+    <form method="POST" th:action="@{/login}" id="loginForm">
+
+        <label>Username</label>
+        <input type="text" name="username" id="username"/>
+
+        <label>Password</label>
+        <input type="password" name="password" id="password"/>
+
+        <button type="submit" class="btn">Login</button>
+    </form>
+
+    <p class="register-link">
+        New here?
+        <a th:href="@{/register}">Create an account</a>
+    </p>
+
+</div>
+
+</body>
+</html>

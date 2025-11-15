@@ -1,0 +1,100 @@
+
+body.login-page {
+    margin: 0;
+    padding: 0;
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+.login-card {
+    background: #ffffff;
+    padding: 40px 45px;
+    width: 380px;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+    text-align: center;
+}
+
+
+.logo {
+    width: 110px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+
+.login-card h1 {
+    margin: 0 0 10px;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.subtitle {
+    margin-bottom: 25px;
+    color: #666;
+}
+
+
+.error-box {
+    background: #ffe5e5;
+    color: #d93025;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+
+.login-card label {
+    display: block;
+    text-align: left;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+.login-card input[type="text"],
+.login-card input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.btn {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    background: #007BFF;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #0069d9;
+}
+
+.register-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}

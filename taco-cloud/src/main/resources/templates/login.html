@@ -13,14 +13,24 @@
     <img th:src="@{/images/TacoCloud.jpg}" class="logo" alt="Taco Cloud"/>
 
     <h1>Welcome back</h1>
-
     <p class="subtitle">Please log in to continue</p>
 
-    <div th:if="${error}" class="error-box">
+
+    <div th:if="${param.error}" class="error-box">
         Unable to login. Check your username and password.
     </div>
 
+
+    <div th:if="${param.logout}" class="info-box">
+        You have been logged out.
+    </div>
+
+
     <form method="POST" th:action="@{/login}" id="loginForm">
+
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}"/>
 
         <label>Username</label>
         <input type="text" name="username" id="username"/>
@@ -30,6 +40,27 @@
 
         <button type="submit" class="btn">Login</button>
     </form>
+
+    <div class="divider">
+        <span>or continue with</span>
+    </div>
+
+    <div class="social-buttons">
+        <a href="/oauth2/authorization/github" class="oauth-btn github">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+            GitHub
+        </a>
+
+        <a href="/oauth2/authorization/google" class="oauth-btn google">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" />
+            Google
+        </a>
+
+        <a href="/oauth2/authorization/facebook" class="oauth-btn facebook">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_(2019).svg" />
+            Facebook
+        </a>
+    </div>
 
     <p class="register-link">
         New here?

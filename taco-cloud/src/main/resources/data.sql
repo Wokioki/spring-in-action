@@ -1,10 +1,3 @@
-
-DELETE FROM Ingredient_Ref;
-DELETE FROM Taco;
-DELETE FROM Taco_Order;
-DELETE FROM Ingredient;
-
-
 INSERT INTO Ingredient (id, name, type) VALUES
 ('FLTO', 'Flour Tortilla',   'WRAP'),
 ('COTO', 'Corn Tortilla',    'WRAP'),

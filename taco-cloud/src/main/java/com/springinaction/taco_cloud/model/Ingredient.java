@@ -2,6 +2,8 @@ package com.springinaction.taco_cloud.model;
 
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,7 @@ public class Ingredient {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private Type type;
 
     public enum Type {

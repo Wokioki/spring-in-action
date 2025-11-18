@@ -8,6 +8,10 @@
 <body class="center-page">
 <div class="card">
     <form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
+        <input type="hidden"
+               th:name="${_csrf.parameterName}"
+               th:value="${_csrf.token}"/>
+
         <h1>Order your taco creations!</h1>
         <img th:src="@{/images/TacoCloud.jpg}" alt="Taco Cloud Logo" class="logo"/>
 

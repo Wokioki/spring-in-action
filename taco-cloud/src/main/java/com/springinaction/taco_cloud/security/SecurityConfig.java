@@ -1,11 +1,9 @@
 package com.springinaction.taco_cloud.security;
 
-import com.springinaction.taco_cloud.model.User;
 import com.springinaction.taco_cloud.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,35 +14,42 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
+    public UserDetailsService userDetailsService(UserRepository userRepo) {
+        return username -> {
+            var user = userRepo.findByUsername(username);
+            if (user != null) {
+                return user;
+            }
+            throw new UsernameNotFoundException("User '" + username + "' not found");
+        };
+    }
+
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepo) {
-        return username -> {
-            User user = userRepo.findByUsername(username);
-            if (user != null) {
-                return user;
-            }
-
-            throw new UsernameNotFoundException(
-                    "User '" + username + "' not found");
-        };
-    }
-
-    @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
+
+        http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/design", "/orders/**").hasRole("USER")
+                        .requestMatchers("/design", "/orders/**").authenticated()
                         .anyRequest().permitAll()
                 )
-                .formLogin(login -> login
+                .formLogin(form -> form
                         .loginPage("/login")
+                        .defaultSuccessUrl("/design", true)
+                        .permitAll()
                 )
-                .logout(Customizer.withDefaults())
-                .csrf(csrf -> csrf.disable())
-                .build();
+                .oauth2Login(oauth -> oauth
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/design", true)
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/")
+                );
+
+        return http.build();
     }
 }

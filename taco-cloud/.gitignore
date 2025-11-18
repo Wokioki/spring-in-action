@@ -1,33 +1,68 @@
-HELP.md
+############################
+# === Maven / Java Build ===
+############################
 target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+*/target/
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
+############################
+# === IntelliJ IDEA ===
+############################
+.idea/
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+############################
+# === VS Code ===
+############################
 .vscode/
+
+############################
+# === NetBeans ===
+############################
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+############################
+# === Eclipse / STS ===
+############################
+.classpath
+.project
+.settings/
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache
+
+############################
+# === Logs ===
+############################
+*.log
+
+############################
+# === OS Files ===
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# === H2 DB Files ===
+############################
+*.h2.db
+*.mv.db
+
+############################
+# === ENV / Secrets ===
+# DO NOT PUSH application.properties with secrets
+src/main/resources/application.properties
+
+############################
+# === Node / NPM (if added later) ===
+############################
+node_modules/

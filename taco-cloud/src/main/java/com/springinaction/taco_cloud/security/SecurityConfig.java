@@ -4,6 +4,7 @@ import com.springinaction.taco_cloud.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,8 +15,19 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepo) {
+    public UserDetailsService userDetailsService(UserRepository userRepo,
+                                                 PasswordEncoder passwordEncoder) {
+
+        var admin = User.withUsername("admin")
+                .password(passwordEncoder.encode("admin"))
+                .roles("ADMIN", "USER")
+                .build();
+
         return username -> {
+            if ("admin".equals(username)) {
+                return admin;
+            }
+
             var user = userRepo.findByUsername(username);
             if (user != null) {
                 return user;
@@ -35,6 +47,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/design", "/orders/**").authenticated()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form

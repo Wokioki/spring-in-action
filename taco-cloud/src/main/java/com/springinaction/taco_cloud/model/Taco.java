@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +25,7 @@ public class Taco {
     private String name;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "taco_order")
     private TacoOrder tacoOrder;
 

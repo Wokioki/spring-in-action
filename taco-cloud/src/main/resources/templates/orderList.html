@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Orders - Taco Cloud</title>
+    <link rel="stylesheet" th:href="@{/orderList.css}" />
+</head>
+<body class="orders-page">
+
+<div class="orders-card">
+    <h1>My Orders</h1>
+    <p class="subtitle">Here are your recent taco orders.</p>
+
+
+    <div th:if="${#lists.isEmpty(orders)}">
+        <p>You don't have any orders yet.</p>
+        <a th:href="@{/design}" class="back-link">Design your first taco</a>
+    </div>
+
+
+    <div th:if="${!#lists.isEmpty(orders)}">
+        <table class="orders-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Placed at</th>
+                <th>Delivery name</th>
+                <th>Address</th>
+                <th>Tacos</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <td th:text="${order.id}">1</td>
+                <td th:text="${order.placedAt}">2025-01-01 12:00</td>
+                <td th:text="${order.deliveryName}">John Doe</td>
+                <td>
+                    <span th:text="${order.deliveryStreet}">Street</span>,
+                    <span th:text="${order.deliveryCity}">City</span>,
+                    <span th:text="${order.deliveryState}">ST</span>,
+                    <span th:text="${order.deliveryZip}">00-000</span>
+                </td>
+                <td>
+                    <ul>
+                        <li th:each="taco : ${order.tacos}">
+                            <span th:text="${taco.name}">Taco name</span>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/design}" class="back-link">← Back to design</a>
+    </div>
+</div>
+
+</body>
+</html>

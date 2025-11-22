@@ -5,6 +5,7 @@ import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.io.Serializable;
@@ -52,6 +53,7 @@ public class TacoOrder implements Serializable {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @ToString.Exclude
     private List<Taco> tacos = new ArrayList<>();
 
     public void addTaco(Taco taco){
@@ -60,6 +62,7 @@ public class TacoOrder implements Serializable {
     }
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "user_id")
     private User user;
 

@@ -1,8 +1,8 @@
 package com.springinaction.taco_cloud.repository;
 
 import com.springinaction.taco_cloud.model.Taco;
-import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TacoRepository
-        extends PagingAndSortingRepository<Taco, Long> {
+        extends JpaRepository<Taco, Long> {
 }

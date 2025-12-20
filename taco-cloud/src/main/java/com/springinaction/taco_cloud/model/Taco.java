@@ -1,10 +1,12 @@
 package com.springinaction.taco_cloud.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,8 +29,8 @@ public class Taco {
     @ManyToOne
     @ToString.Exclude
     @JoinColumn(name = "taco_order")
+    @JsonIgnore
     private TacoOrder tacoOrder;
-
 
     @Size(min = 1, message="You must choose at least 1 ingredient")
     @ManyToMany
@@ -38,9 +40,4 @@ public class Taco {
             inverseJoinColumns = @JoinColumn(name = "ingredient")
     )
     private List<Ingredient> ingredients = new ArrayList<>();
-
-    public void addIngredient(Ingredient ingredient){
-        this.ingredients.add(ingredient);
-    }
-
 }

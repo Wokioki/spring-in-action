@@ -1,6 +1,7 @@
 package com.springinaction.taco_cloud.controller;
 
 import com.springinaction.taco_cloud.config.OrderProps;
+import com.springinaction.taco_cloud.messaging.OrderMessagingService;
 import com.springinaction.taco_cloud.model.TacoOrder;
 import com.springinaction.taco_cloud.model.User;
 import com.springinaction.taco_cloud.repository.OrderRepository;
@@ -26,10 +27,14 @@ public class OrderController {
 
     private final OrderRepository orderRepo;
     private final OrderProps orderProps;
+    private final OrderMessagingService orderMessagingService;
 
-    public OrderController(OrderRepository orderRepo, OrderProps orderProps) {
+    public OrderController(OrderRepository orderRepo,
+                           OrderProps orderProps,
+                           OrderMessagingService orderMessagingService) {
         this.orderRepo = orderRepo;
         this.orderProps = orderProps;
+        this.orderMessagingService = orderMessagingService;
     }
 
     @GetMapping("/current")
@@ -50,9 +55,10 @@ public class OrderController {
 
         order.setUser(user);
 
-        orderRepo.save(order);
-        sessionStatus.setComplete();
+        TacoOrder saved = orderRepo.save(order);
+        orderMessagingService.sendOrder(saved);
 
+        sessionStatus.setComplete();
         return "redirect:/design";
     }
 

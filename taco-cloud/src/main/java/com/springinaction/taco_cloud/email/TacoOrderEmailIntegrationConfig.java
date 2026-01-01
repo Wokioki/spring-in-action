@@ -1,0 +1,32 @@
+package com.springinaction.taco_cloud.email;
+
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlows;
+import org.springframework.integration.dsl.Pollers;
+import org.springframework.integration.mail.dsl.Mail;
+
+@Configuration
+@Profile("email")
+@EnableConfigurationProperties(EmailProperties.class)
+public class TacoOrderEmailIntegrationConfig {
+
+    @Bean
+    public IntegrationFlow tacoOrderEmailFlow(
+            EmailProperties emailProps,
+            EmailToOrderTransformer emailToOrderTransformer,
+            OrderSubmitMessageHandler orderSubmitHandler) {
+
+        return IntegrationFlows
+                .from(
+                        Mail.imapInboundAdapter(emailProps.getImapUrl()),
+                        e -> e.poller(Pollers.fixedDelay(emailProps.getPollRate()))
+                )
+                .transform(emailToOrderTransformer)
+                .handle(orderSubmitHandler)
+                .get();
+    }
+}
